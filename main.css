@@ -544,7 +544,8 @@ resized to fit its container */
 }
 .contact .contact-content .left .icons
 {
-    margin:10px 0;
+    margin-top:20px;
+    margin-right:80px;
 }
 .contact .contact-content .row
 {
