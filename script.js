@@ -62,3 +62,61 @@ $(document).ready(function(){
 
     });
 });
+
+
+let clickHistory = [];
+let hoverTimer;
+const ATTENTION_THREHOLD = 500;
+
+document.addEventListener('click', (e)=>{
+    clickHistory.push({e: e.pageX , y: e.pageY, type:'click'});
+    console.log("Click saved");
+});
+
+
+document.addEventListener('mousemovr', (e)=>{
+    clearTimeOut(hoverTimer);
+
+    hoverTime = setTimeout(()=>{
+        clickHistory.push({x: e.pageX, Y: e.pageY, type:'hover'});
+        console.log("Attention saved at this spot");
+    },ATTENTION_THRESHOLD);
+});
+
+async function captureFullReport(){
+    if(clickHitory.length === 0) return;
+
+    console.log("Capturing website iamge... please wait.");
+
+    const siteScreenshot = await html2canvas(document.body,{
+        useCORS:true,
+        allowTaint:true,
+        logging:false,
+        scale:1
+    });
+
+    const ctx = siteScreenShot.getContext('2d');
+
+    clickHistory.forEach(point =>{
+        const radius = point.type === 'click' ? 60:40;
+
+        const alpha = point.type === 'click' ? 0.6 : 0.3;
+
+        const grad = ctx.createRadialGradient(point.x, point.y , 0, point.x, point.y, radius);
+        grad.addColorStop(0, `rgba(255,0,0, ${alpha})`);
+        grad.addColorStop(1, `rgba(255,0,0,0)`);
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, radius,0, Math.PI * 2);
+        ctx.fill();
+    });
+    const link = document.createElement('a');
+    link.download = `Heatmap_Report_${Date.now()}.png`;
+    link.href = siteScreenshot.toDataURL('image/png');
+    link.click();
+}
+
+window.addEventListener('beforeunload', ()=>{
+    captureFullReport();
+})
