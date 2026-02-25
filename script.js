@@ -80,7 +80,7 @@ document.addEventListener('mousemove', (e)=>{
     hoverTime = setTimeout(()=>{
         clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
         console.log("Attention saved at this spot");
-    },ATTENTION_THRESHOLD);
+    },ATTENTION_THREHOLD);
 });
 
 async function captureFullReport(){
