@@ -69,7 +69,7 @@ let hoverTimer;
 const ATTENTION_THRSEHOLD = 500;
 
 document.addEventListener('click', (e)=>{
-    clickHistory.push({e: e.pageX , y: e.pageY, type:'click'});
+    clickHistory.push({x: e.pageX , y: e.pageY, type:'click'});
     console.log("Click saved");
 });
 
@@ -77,7 +77,7 @@ document.addEventListener('click', (e)=>{
 document.addEventListener('mousemove', (e)=>{
     clearTimeout(hoverTimer);
 
-    hoverTime = setTimeout(()=>{
+    hoverTimer = setTimeout(()=>{
         clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
         console.log("Attention saved at this spot");
     },ATTENTION_THRSEHOLD);
