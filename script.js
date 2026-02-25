@@ -75,7 +75,7 @@ document.addEventListener('click', (e)=>{
 
 
 document.addEventListener('mousemove', (e)=>{
-    clearTimeOut(hoverTimer);
+    clearTimeout(hoverTimer);
 
     hoverTime = setTimeout(()=>{
         clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
