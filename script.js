@@ -74,17 +74,17 @@ document.addEventListener('click', (e)=>{
 });
 
 
-document.addEventListener('mousemovr', (e)=>{
+document.addEventListener('mousemove', (e)=>{
     clearTimeOut(hoverTimer);
 
     hoverTime = setTimeout(()=>{
-        clickHistory.push({x: e.pageX, Y: e.pageY, type:'hover'});
+        clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
         console.log("Attention saved at this spot");
     },ATTENTION_THRESHOLD);
 });
 
 async function captureFullReport(){
-    if(clickHitory.length === 0) return;
+    if(clickHistory.length === 0) return;
 
     console.log("Capturing website iamge... please wait.");
 
@@ -95,7 +95,7 @@ async function captureFullReport(){
         scale:1
     });
 
-    const ctx = siteScreenShot.getContext('2d');
+    const ctx = siteScreenshot.getContext('2d');
 
     clickHistory.forEach(point =>{
         const radius = point.type === 'click' ? 60:40;
@@ -111,6 +111,7 @@ async function captureFullReport(){
         ctx.arc(point.x, point.y, radius,0, Math.PI * 2);
         ctx.fill();
     });
+
     const link = document.createElement('a');
     link.download = `Heatmap_Report_${Date.now()}.png`;
     link.href = siteScreenshot.toDataURL('image/png');
