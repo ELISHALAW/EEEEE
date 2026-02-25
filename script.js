@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 let clickHistory = [];
 let hoverTimer;
-const ATTENTION_THREHOLD = 500;
+const ATTENTION_THRSEHOLD = 500;
 
 document.addEventListener('click', (e)=>{
     clickHistory.push({e: e.pageX , y: e.pageY, type:'click'});
@@ -80,7 +80,7 @@ document.addEventListener('mousemove', (e)=>{
     hoverTime = setTimeout(()=>{
         clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
         console.log("Attention saved at this spot");
-    },ATTENTION_THREHOLD);
+    },ATTENTION_THRSEHOLD);
 });
 
 async function captureFullReport(){
