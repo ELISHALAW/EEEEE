@@ -6,14 +6,16 @@
     box-sizing:border-box;
     text-decoration:none;
 }
+
+
 body
 {
     
     background:url('network-4851119.jpg');
     background-size:cover;
     background-repeat:no-repeat;
-  
-    
+    background-attachment: scroll;
+    width: 100%;
 }
 html
 {
@@ -127,10 +129,13 @@ html
 /* home section styling */
 .home
 {
+    align-items: center;
+    justify-content: center;
     display:flex;
-    background:url("Elisha.png");
+    background:url("Elisha.png") no-repeat center center;
     background-size:cover;
     height: 100vh;
+    width:100%;
     color:#fff;
     min-height:500px;
     font-family:'Space-Mono',sans-serif;
@@ -240,6 +245,7 @@ section .title::after
 .about .title::after
 {
     content:"Who I am";
+    color:white;
 }
 
 .about .about-content .left
@@ -313,6 +319,7 @@ resized to fit its container */
 .services .title::after,.company .title::after
 {
     content:"What I provide";
+    color:white;
 
 
 }
@@ -349,6 +356,7 @@ resized to fit its container */
 .skills .title::after
 {
     content:"What I know";
+    color: white;
 }
 .skills .skills-content .column 
 {
@@ -452,6 +460,7 @@ resized to fit its container */
 .company .title::after 
 {
     content:"What I did before";
+    color: white;
 }
 .company .carousel .card
 {
@@ -525,6 +534,7 @@ resized to fit its container */
 .contact .title::after
 {
     content:"Get In Touch";
+    color: white;
 } 
 .contact .contact-content .column 
 {

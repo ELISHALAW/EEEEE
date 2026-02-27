@@ -25,13 +25,13 @@ $(document).ready(function(){
 
     // typing animation script 
     var typed = new Typed(".typing",{
-        strings:["IT developer","Student","Front-end developer","Ethical Hacker","Back-end developer"," Video Editor"],
+        strings:["IT developer","Front-end developer","Software Support","Back-end developer"," Wed Developer"],
         typeSpeed:100,
         backSpeed:60,
         loop:true
     })
     var typed = new Typed(".typing-2",{
-        strings:["IT developer","Student","Front-end developer","Ethical Hacker","Back-end developer"," Video Editor"],
+        strings:["IT developer","Front-end developer","Software Support","Back-end developer","Wed Developer"],
         typeSpeed:100,
         backSpeed:60,
         loop:true
@@ -64,35 +64,39 @@ $(document).ready(function(){
 });
 
 
+
 let clickHistory = [];
 let hoverTimer;
 const ATTENTION_THRSEHOLD = 500;
 
 document.addEventListener('click', (e)=>{
-    clickHistory.push({x: e.pageX , y: e.pageY, type:'click'});
-    console.log("Click saved");
-});
-
-
+    clickHistory.push({
+        x:e.pageX,
+        y:e.pageY,
+        type:'click'
+    })
+})
 document.addEventListener('mousemove', (e)=>{
     clearTimeout(hoverTimer);
 
     hoverTimer = setTimeout(()=>{
         clickHistory.push({x: e.pageX, y: e.pageY, type:'hover'});
-        console.log("Attention saved at this spot");
     },ATTENTION_THRSEHOLD);
 });
 
 async function captureFullReport(){
     if(clickHistory.length === 0) return;
 
-    console.log("Capturing website iamge... please wait.");
-
     const siteScreenshot = await html2canvas(document.body,{
         useCORS:true,
         allowTaint:true,
         logging:false,
-        scale:1
+        scale:1,
+        scrollX:0,
+        scrollY:0,
+        windowWidth:window.innerWidth,
+        height:document.body.scrollHeight,
+        backgroundColor:null
     });
 
     const ctx = siteScreenshot.getContext('2d');
@@ -112,12 +116,10 @@ async function captureFullReport(){
         ctx.fill();
     });
 
+
     const link = document.createElement('a');
     link.download = `Heatmap_Report_${Date.now()}.png`;
     link.href = siteScreenshot.toDataURL('image/png');
     link.click();
 }
 
-window.addEventListener('beforeunload', ()=>{
-    captureFullReport();
-})
